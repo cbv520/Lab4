@@ -1,7 +1,7 @@
 public class DSALinkedList
 {
-    private Object head;
-    private Object tail;
+    private DSAListNode head;
+    private DSAListNode tail;
 
     DSALinkedList()
     {
@@ -20,8 +20,13 @@ public class DSALinkedList
         }
         else
         {
+            if(tail.getPrev() == null)
+            {
+                tail.setPrev(head);
+            }
+            head.setPrev(newNode);
             newNode.setNext(head);
-            newNode = head;
+            head = newNode;
         }
     }
 
@@ -36,8 +41,13 @@ public class DSALinkedList
         }
         else
         {
+            tail.setNext(newNode);
             newNode.setPrev(tail);
-            newNode = tail;
+            tail = newNode;
+            if(head.getNext() == null)
+            {
+                head = tail;
+            }
         }
     }
 
@@ -46,27 +56,63 @@ public class DSALinkedList
         return (head == null);
     }
 
-    peekFirst
+    public Object peekFirst()
+    {
+        return head.getValue();
+    }
 
-    peekLast
+    public Object peekLast()
+    {
+        return tail.getValue();
+    }
 
-    removeFirst
+    public Object removeFirst()
+    {
+        DSAListNode returnNode = null;
 
-    removeLast
+        if(isEmpty())
+        {
+
+        }
+        else
+        {
+            returnNode = new DSAListNode(head.getValue());
+            head = head.getNext();
+        }
+
+        return returnNode.getValue();
+    }
+
+    public Object removeLast()
+    {
+        DSAListNode returnNode = null;
+
+        if(isEmpty())
+        {
+
+        }
+        else
+        {
+            returnNode = new DSAListNode(tail.getValue());
+            tail = tail.getPrev();
+        }
+
+        return returnNode.getValue();
+    }
 
 
 
     private class DSAListNode
     {
         private Object value;
-        private Object prev;
-        private Object next;
+        private DSAListNode prev;
+        private DSAListNode next;
 
         DSAListNode(Object inVal)
         {
             value = inVal;
-            inPrev = null;
-            inNext = null;
+            prev = null;
+            next = null;
         }
 
         public Object getValue()
@@ -79,22 +125,22 @@ public class DSALinkedList
             value = inVal;
         }
 
-        public Object getNext()
+        public DSAListNode getNext()
         {
             return next;
         }
 
-        public void setNext(Object inNext)
+        public void setNext(DSAListNode inNext)
         {
             next = inNext;
         }
 
-        public Object getPrev()
+        public DSAListNode getPrev()
         {
             return prev;
         }
 
-        public void setPrev(Object inPrev)
+        public void setPrev(DSAListNode inPrev)
         {
             prev = inPrev;
         }
