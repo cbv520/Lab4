@@ -20,10 +20,6 @@ public class DSALinkedList
         }
         else
         {
-            if(tail.getPrev() == null)
-            {
-                tail.setPrev(head);
-            }
             head.setPrev(newNode);
             newNode.setNext(head);
             head = newNode;
@@ -44,31 +40,39 @@ public class DSALinkedList
             tail.setNext(newNode);
             newNode.setPrev(tail);
             tail = newNode;
-            if(head.getNext() == null)
-            {
-                head = tail;
-            }
         }
     }
 
     public boolean isEmpty()
     {
-        return (head == null);
+        return (head == null || tail == null);
     }
 
     public Object peekFirst()
     {
-        return head.getValue();
+        Object firstObj = null;
+
+        if(head != null)
+        {
+            firstObj = head.getValue();
+        }
+        return firstObj;
     }
 
     public Object peekLast()
     {
-        return tail.getValue();
+        Object lastObj = null;
+
+        if(tail != null)
+        {
+            lastObj = tail.getValue();
+        }
+        return lastObj;
     }
 
     public Object removeFirst()
     {
-        DSAListNode returnNode = null;
+        Object returnObj = null;
 
         if(isEmpty())
         {
@@ -76,16 +80,16 @@ public class DSALinkedList
         }
         else
         {
-            returnNode = new DSAListNode(head.getValue());
+            returnObj = head.getValue();
             head = head.getNext();
         }
 
-        return returnNode.getValue();
+        return returnObj;
     }
 
     public Object removeLast()
     {
-        DSAListNode returnNode = null;
+        Object returnObj = null;
 
         if(isEmpty())
         {
@@ -93,11 +97,11 @@ public class DSALinkedList
         }
         else
         {
-            returnNode = new DSAListNode(tail.getValue());
+            returnObj = tail.getValue();
             tail = tail.getPrev();
         }
 
-        return returnNode.getValue();
+        return returnObj;
     }
 
 
