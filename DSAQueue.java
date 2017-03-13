@@ -9,7 +9,17 @@ public class DSAQueue
 
     public int getCount()
     {
-        return 6;
+        DSALinkedList tempList = new DSALinkedList();
+        int count = 0;
+    
+        while(!list.isEmpty())
+        {
+            tempList.insertLast(list.removeFirst());
+            count++;  
+        }
+        list = tempList;        
+
+        return count;
     }
 
     public boolean isEmpty()
